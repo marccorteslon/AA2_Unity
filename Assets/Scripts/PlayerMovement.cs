@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private bool isGrounded;
 
-    private InputSystem_Actions inputs;
+    InputSystem_Actions inputs;
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         inputs.Enable();
-}
+    }
 
     void Update()
     {
@@ -34,10 +34,24 @@ public class PlayerMovement : MonoBehaviour
         dir.z = dir.y;
         dir.y = 0;
 
-        dir = transform.TransformDirection(dir);
+        float currentSpeed = speed;
 
-        transform.position += transform.forward * dir.z * speed * Time.deltaTime;
-        transform.position += transform.right * dir.x * speed * Time.deltaTime;
+        // En función de la dirección, se multiplica la velocidad
+
+        if (dir.z > 0) {
+            currentSpeed = speed;
+        }
+        else if(dir.z < 0) {
+            currentSpeed = speed * 0.5f; ;
+        }
+        else if (dir.x != 0)
+        {
+            currentSpeed = speed * 0.75f; ;
+        }
+
+        transform.position += transform.forward * dir.z * currentSpeed * Time.deltaTime;
+        transform.position += transform.right * dir.x * currentSpeed * Time.deltaTime;
+
 
         // Detectar si está en el suelo
         isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, groundDistance, groundMask);

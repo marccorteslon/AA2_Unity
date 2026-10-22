@@ -4,8 +4,11 @@ public class CameraRotation : MonoBehaviour
 {
     [Header("Ratón")]
     public float mouseSensitivity = 100f; // Sensibilidad
-    public float maxLookAngle = 80f;      // Límites
-    public float minLookAngle = -80f;     // Límites
+   
+    // Los limites para mirar 
+    
+    public float maxLookAngle = 80f;      
+    public float minLookAngle = -80f;    
 
     private float xRotation = 0f;
 
